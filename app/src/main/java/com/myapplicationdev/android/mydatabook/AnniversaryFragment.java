@@ -1,10 +1,16 @@
 package com.myapplicationdev.android.mydatabook;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -13,7 +19,8 @@ import androidx.fragment.app.Fragment;
  * create an instance of this fragment.
  */
 public class AnniversaryFragment extends Fragment {
-
+    Button btn;
+    TextView tv;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -57,7 +64,36 @@ public class AnniversaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.anniversaryfragment, container, false);
+        View view =  inflater.inflate(R.layout.vaccinationfragment, container, false);
+        btn = view.findViewById(R.id.button);
+        tv = view.findViewById(R.id.textView);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService
+                        (Context.LAYOUT_INFLATER_SERVICE);
+                View viewDialog = inflater.inflate(R.layout.input,null);
+                final EditText etInput = viewDialog.findViewById(R.id.editText);
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(getActivity());
+                myBuilder.setView(viewDialog);
+                myBuilder.setTitle("Edit Anniversary");
+                myBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String message = etInput.getText().toString();
+                        tv.setText(message);
+                    }
+                });
+                myBuilder.setNeutralButton("Cancel",null);
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
+
+            }
+
+
+        });
+
+
+        return view;
     }
 }

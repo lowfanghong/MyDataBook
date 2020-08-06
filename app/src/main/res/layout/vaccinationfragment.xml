@@ -14,7 +14,14 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="416dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="161dp"
+            android:layout_height="wrap_content"
+            android:text="edit" />
 
     </LinearLayout>
 
